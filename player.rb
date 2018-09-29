@@ -1,4 +1,4 @@
-# class for controlling the mechanics of the player
+# parent class for dealer and human
 class Player
   attr_accessor :hand, :cards, :coin
 
@@ -8,5 +8,5 @@ class Player
     @cards = Deck.new
     @hand = []
   end
-  
+
 end
