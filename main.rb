@@ -1,7 +1,9 @@
+require_relative 'card'
 require_relative 'dealer'
+require_relative 'human'
 require_relative 'player'
 require_relative 'deck'
-require_relative 'card'
+
 # class to manage the game
 class MainInterface
   def menu
