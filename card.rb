@@ -10,10 +10,10 @@ class Card
   end
 
   def rating
-    return @rank if %w[2 3 4 5 6 7 8 9 10].include?(rank)
-    return 10 if %w[J Q K].include?(rank)
-    return 1 if rank == 'A'
-    @value
+    return @card if %w[2 3 4 5 6 7 8 9 10].include?(card)
+    return 10 if %w[J Q K].include?(card)
+    return 1 if card == 'A'
+    @rating
   end
   
 end
