@@ -4,4 +4,9 @@ class Human < Player
   def initialize
     super
   end
+
+  def show_dealer
+    @hand.size { |_card| print '*  ' }
+  end
+  
 end
