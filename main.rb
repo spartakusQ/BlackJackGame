@@ -13,10 +13,9 @@ class MainInterface
     puts 'Для начала игры введите своё имя: '
     @name = gets.chomp.capitalize
     puts "#{@name} сегодня хороший вечер чтобы заработать несколько монет. "
-    @player = Human.new(@name)
+    @human = Human.new(@name)
     @dealer = Dealer.new(@name)
     start_game
-    
   end
 
   def start_game
@@ -24,14 +23,22 @@ class MainInterface
     2.times { add_card(@dealer) }
     @human.rate
     @dealer.rate
-    puts "#{@name} у вас на руках карты #{@human.hand[0].card} #{@human.hand[0].shirt} #{@human.hand[1].card}#{@human.hand[1].shirt} у вас осталось#{@human.coin}$ сумма карт #{card_amount(@human)} "
+    puts "#{@name} у вас на руках карты #{@human.hand[0].card} #{@human.hand[0].shirt} #{@human.hand[1].card}#{@human.hand[1].shirt} у вас осталось #{@human.coin}$ сумма карт #{card_amount(@human)} "
     puts "#{see_dealer} и осталось #{@dealer.coin}$"
-    menu
+    # menu
+    exit
+  end
+
+  def card_amount(human)
+    human.count_values
+  end
 
   def add_card(human)
    human.deal
   end
-    
+
+  def see_dealer
+   "У диллера #{@dealer.show_dealer} карты"
   end
   
 end

@@ -7,4 +7,9 @@ class Dealer < Player
     @cards = Deck.new
     @hand = []
   end
+
+  def show_dealer
+    @hand.size { |_card| print '*  ' }
+  end
+  
 end
