@@ -41,4 +41,13 @@ class Player
     @hand.clear
   end
 
+  def count_values
+    @count = 0
+    @hand.each do |card|
+      @count += card.shirt.to_i
+      @count += 10 if card.shirt == 1 && @count + 10 <= 21
+    end
+    @count
+  end
+
 end
