@@ -9,4 +9,24 @@ class Player
     @hand = []
   end
 
+  def deal
+    @hand << @cards.reach
+  end
+
+  def rate
+    @coin -= 10
+  end
+
+  def double_win
+    @coin += 20
+  end
+
+  def win
+    @coin += 10
+  end
+
+  def zero?
+    @coin.zero?
+  end
+
 end
