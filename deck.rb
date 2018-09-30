@@ -10,7 +10,7 @@ class Deck
     @cards = []
     Card::SHIRTS.each do |shirt|
       Card::CARDS.each do |card|
-        @cards << Card.new(rank, suit)
+        @cards << Card.new(card, shirt)
       end
     end
     @cards.shuffle!
