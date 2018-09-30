@@ -41,7 +41,17 @@ class MainInterface
   end
 
 def menu
-
+  puts %(Смотрите карты и решайте:
+    1- Взять одну карту
+    2- Пропустить ход
+    3- Открываем карты)  
+  input = gets.to_i
+  case input
+  when 1 then 
+  when 2 then 
+  when 3 then 
+  when 0 then exit
+  end
 end
   
 end
