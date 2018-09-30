@@ -27,6 +27,9 @@ class MainInterface
     puts "#{@name} у вас на руках карты #{@human.hand[0].card} #{@human.hand[0].shirt} #{@human.hand[1].card}#{@human.hand[1].shirt} у вас осталось#{@human.coin}$ сумма карт #{card_amount(@human)} "
     puts "#{see_dealer} и осталось #{@dealer.coin}$"
     menu
+
+  def add_card(human)
+   human.deal
   end
     
   end
