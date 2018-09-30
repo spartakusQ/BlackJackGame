@@ -15,4 +15,9 @@ class Deck
     end
     @cards.shuffle!
   end
+  
+  def remained
+    @cards.length
+  end
+
 end
