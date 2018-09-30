@@ -6,14 +6,14 @@ require_relative 'deck'
 
 # class to manage the game
 class MainInterface
-  def menu
-    puts 'Напишите своё имя, если хотите сыграть: '
-    name = gets.chomp.to_s
-    puts "Добрый вечер #{name}"
-    exit
-  end
-end
+  attr_accessor :cards, :deck, :hand, :user, :coin
 
-def method_name
-  "#{}"
+  def initialize
+    
+  end
+
+  def start_game
+    
+  end
+  
 end

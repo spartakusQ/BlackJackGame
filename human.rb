@@ -8,5 +8,5 @@ class Human < Player
   def show_dealer
     @hand.size { |_card| print '*  ' }
   end
-  
+
 end
