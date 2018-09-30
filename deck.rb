@@ -15,9 +15,13 @@ class Deck
     end
     @cards.shuffle!
   end
-  
+
   def remained
     @cards.length
+  end
+
+  def reach
+    @cards.shift
   end
 
 end
