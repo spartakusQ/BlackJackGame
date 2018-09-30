@@ -24,4 +24,8 @@ class Deck
     @cards.shift
   end
 
+  def shuffle_cards
+    @cards.shuffle!
+  end
+
 end
