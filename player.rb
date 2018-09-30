@@ -29,4 +29,8 @@ class Player
     @coin.zero?
   end
 
+  def show_card
+    @hand.each { |card| print "#{card} " }
+  end
+
 end
