@@ -37,4 +37,8 @@ class Player
     @hand.size { |_card| print '*  ' }
   end
 
+  def reset_cards
+    @hand.clear
+  end
+
 end
