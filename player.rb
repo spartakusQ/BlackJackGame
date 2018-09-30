@@ -33,4 +33,8 @@ class Player
     @hand.each { |card| print "#{card} " }
   end
 
+  def show_dealer
+    @hand.size { |_card| print '*  ' }
+  end
+
 end
