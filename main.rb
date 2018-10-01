@@ -4,13 +4,13 @@ require_relative 'player'
 
 # class to manage the game
 class MainInterface
-  attr_accessor :cards, :deck, :hand, :human, :dealer, :coin
+  attr_accessor :cards, :deck, :hand, :player, :coin
 
   def initialize
     @deck = Deck.new
     puts 'Для начала игры введите своё имя: '
     @name = gets.chomp.capitalize
-    puts "#{@name} сегодня хороший вечер чтобы заработать несколько монет. "
+    puts "#{@name} сегодня хороший вечер чтобы заработать несколько монет."
     @human = Player.new(@name)
     @dealer = Player.new('Dealer')
     start_game
@@ -21,17 +21,18 @@ class MainInterface
     2.times { add_card(@dealer) }
     @human.rate
     @dealer.rate
-    puts "#{@name} у вас на руках карты #{@human.hand[0].card} #{@human.hand[0].shirt} #{@human.hand[1].card}#{@human.hand[1].shirt} у вас осталось #{@human.coin}$ сумма карт #{card_amount(@human)} "
+    puts "#{@name} у вас на руках карты #{@human.hand[0].par} #{@human.hand[0].shirt} #{@human.hand[1].par}#{@human.hand[1].shirt} у вас осталось #{@human.coin}$ сумма карт #{card_amount(@human)} "
     puts "#{see_dealer} и осталось #{@dealer.coin}$"
     menu
   end
 
-  def card_amount(human)
-    human.count_values
+
+  def card_amount(player)
+    player.scorer_values
   end
 
-  def add_card(human)
-    human.deal
+  def add_card(player)
+    player.deal
   end
 
   def see_card
@@ -57,9 +58,9 @@ class MainInterface
   end
 
   def show_card_human
-    puts "#{@name} у вас на руках карты #{@human.hand[0].card} #{@human.hand[0].shirt} #{@human.hand[1].card}
+    puts "#{@name} у вас на руках карты #{@human.hand[0].par} #{@human.hand[0].shirt} #{@human.hand[1].par}
     #{@human.hand[1].shirt} сумма #{card_amount(@player)}"
-    puts "У диллера на руках карты #{@dealer.hand[0].card} #{@dealer.hand[0].shirt} #{@player.hand[1].card}
+    puts "У диллера на руках карты #{@dealer.hand[0].par} #{@dealer.hand[0].shirt} #{@player.hand[1].par}
     #{@dealer.hand[1].shirt} сумма #{card_amount(@dealer)}"
     if card_amount(@dealer) > card_amount(@player) && card_amount(@dealer) < 21
       @dealer.double_win
@@ -79,7 +80,7 @@ class MainInterface
 
   def human_give
     add_card(@human)
-    puts "Вы взяли карту #{@human.hand[2].card}#{@human.hand[2].shirt}, сумма карт стала #{card_amount(@human)} "
+    puts "Вы взяли карту #{@human.hand[2].par}#{@human.hand[2].shirt}, сумма карт стала #{card_amount(@human)} "
     dealer_give
     if card_amount(@human) <= 21 && card_amount(@human) > card_amount(@dealer)
       puts "У диллера #{card_amount(@dealer)} очков"
@@ -92,8 +93,8 @@ class MainInterface
   def dealer_give
     while card_amount(@dealer) <= 17
       add_card(@dealer)
-      puts "Дилер взял карту #{@dealer.hand[2].card}#{@dealer.hand[2].shirt} "
-      puts "У диллера #{@dealer.hand[0].card}#{@dealer.hand[0].shirt} #{@dealer.hand[1].card}#{@dealer.hand[1].shirt} #{@dealer.hand[2].card}#{@dealer.hand[2].shirt}сумма карт #{card_amount(@dealer)}"
+      puts "Дилер взял карту #{@dealer.hand[2].par}#{@dealer.hand[2].shirt} "
+      puts "У диллера #{@dealer.hand[0].par}#{@dealer.hand[0].shirt} #{@dealer.hand[1].par}#{@dealer.hand[1].shirt} #{@dealer.hand[2].par}#{@dealer.hand[2].shirt}сумма карт #{card_amount(@dealer)}"
       if card_amount(@dealer) > card_amount(@human) && card_amount(@dealer) < 21
         @dealer.double_win
         puts "Ты проиграл, Выйграл диллер. У диллера #{@dealer.coin}$, у тебя #{@human.coin}$"
@@ -103,12 +104,12 @@ class MainInterface
            new_game
       end
       if card_amount(@dealer) == 21
-        puts "У диллера #{@dealer.hand[0].card}#{@dealer.hand[0].shirt} #{@dealer.hand[1].card}#{@dealer.hand[1].shirt}"
+        puts "У диллера #{@dealer.hand[0].par}#{@dealer.hand[0].shirt} #{@dealer.hand[1].par}#{@dealer.hand[1].shirt}"
         @dealer.double_win
         puts "Диллер выйграл сумма карт #{card_amount(@dealer)} У диллера #{@dealer.coin}$ у тебя #{@human.coin}$"
         new_game
       elsif card_amount(@dealer) > 21
-        puts "У диллера #{@dealer.hand[0].card}#{@dealer.hand[0].shirt} #{@dealer.hand[1].card}#{@dealer.hand[1].shirt}"
+        puts "У диллера #{@dealer.hand[0].par}#{@dealer.hand[0].shirt} #{@dealer.hand[1].par}#{@dealer.hand[1].shirt}"
         @human.double_win
         puts "У диллера больше 21, ты победил. У тебя #{@human.coin}$"
         new_game
