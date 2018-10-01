@@ -5,12 +5,12 @@ class Deck
   def initialize
     @cards = Deck.build_deck
   end
-  
+
   def self.build_deck
     @cards = []
     Card::SHIRTS.each do |shirt|
-      Card::CARDS.each do |card|
-        @cards << Card.new(card, shirt)
+      Card::PARS.each do |par|
+        @cards << Card.new(par, shirt)
       end
     end
     @cards.shuffle!
@@ -27,5 +27,4 @@ class Deck
   def shuffle_cards
     @cards.shuffle!
   end
-
 end
