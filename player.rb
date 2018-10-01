@@ -1,4 +1,4 @@
-# parent class for dealer and human
+# class for player function management
 class Player
   attr_accessor :hand, :cards, :coin
 
@@ -30,24 +30,26 @@ class Player
   end
 
   def show_card
-    @hand.each { |card| print "#{card} " }
+    @hand.each { |par| print "#{par} " }
   end
 
   def reset_cards
     @hand.clear
   end
 
-  def count_values
-    @count = 0
-    @hand.each do |card|
-      @count += card.shirt.to_i
-      @count += 10 if card.shirt == 1 && @count + 10 <= 21
+  def scorer_values
+    @scorer = 0
+    @hand.each do |par|
+      @scorer += par.rating.to_i
+      @scorer += 10 if par.rating == 1 && @scorer + 10 <= 21
     end
-    @count
+    @scorer
   end
+  
+
 
   def show_dealer
-    @hand.size { |_card| print '*  ' }
+    @hand.size { |_par| print '*  ' }
   end
 
 end
