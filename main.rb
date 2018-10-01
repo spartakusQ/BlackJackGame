@@ -58,16 +58,16 @@ class MainInterface
 
   def show_card_human
     puts "#{@name} у вас на руках карты #{@human.hand[0].par} #{@human.hand[0].shirt} #{@human.hand[1].par}
-    #{@human.hand[1].shirt} сумма #{card_amount(@player)}"
-    puts "У диллера на руках карты #{@dealer.hand[0].par} #{@dealer.hand[0].shirt} #{@player.hand[1].par}
+    #{@human.hand[1].shirt} сумма #{card_amount(@human)}"
+    puts "У диллера на руках карты #{@dealer.hand[0].par} #{@dealer.hand[0].shirt} #{@human.hand[1].par}
     #{@dealer.hand[1].shirt} сумма #{card_amount(@dealer)}"
-    if card_amount(@dealer) > card_amount(@player) && card_amount(@dealer) < 21
+    if card_amount(@dealer) > card_amount(@human) && card_amount(@dealer) < 21
       @dealer.double_win
-      puts "Ты проиграл, Выйграл диллер. У диллера #{@dealer.coin}$, у тебя #{@player.coin}$"
+      puts "Ты проиграл, Выйграл диллер. У диллера #{@dealer.coin}$, у тебя #{@human.coin}$"
       new_game
-    elsif card_amount(@player) > card_amount(@dealer) && card_amount(@player) < 21
+    elsif card_amount(@human) > card_amount(@dealer) && card_amount(@human) < 21
       puts "Ты выиграл, у диллера #{card_amount(@dealer)}очков"
-      @player.double_win
+      @human.double_win
       new_game
     else
       @player.win
