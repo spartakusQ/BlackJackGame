@@ -13,7 +13,5 @@ class Card
     return @par if %w[2 3 4 5 6 7 8 9 10].include?(par)
     return 10 if %w[J Q K].include?(par)
     return 1 if par == 'A'
-
-    @rating
   end
 end
