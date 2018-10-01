@@ -1,4 +1,5 @@
 require_relative 'card'
+require_relative 'dealer'
 require_relative 'deck'
 require_relative 'player'
 
@@ -12,7 +13,7 @@ class MainInterface
     @name = gets.chomp.capitalize
     puts "#{@name} сегодня хороший вечер чтобы заработать несколько монет."
     @human = Player.new(@name)
-    @dealer = Player.new('Dealer')
+    @dealer = Dealer.new('Dealer')
     start_game
   end
 
