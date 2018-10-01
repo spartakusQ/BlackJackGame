@@ -45,11 +45,8 @@ class Player
     end
     @scorer
   end
-  
-
 
   def show_dealer
     @hand.size { |_par| print '*  ' }
   end
-
 end

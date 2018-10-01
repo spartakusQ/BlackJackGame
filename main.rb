@@ -26,7 +26,6 @@ class MainInterface
     menu
   end
 
-
   def card_amount(player)
     player.scorer_values
   end
@@ -50,10 +49,10 @@ class MainInterface
       3- Открываем карты)
     input = gets.to_i
     case input
-      when 1 then human_give
-      when 2 then dealer_give
-      when 3 then show_card_human
-      when 0 then exit
+    when 1 then human_give
+    when 2 then dealer_give
+    when 3 then show_card_human
+    when 0 then exit
     end
   end
 
@@ -99,7 +98,7 @@ class MainInterface
         @dealer.double_win
         puts "Ты проиграл, Выйграл диллер. У диллера #{@dealer.coin}$, у тебя #{@human.coin}$"
         new_game
-      else @human.double_win
+      elsif @human.double_win
            puts "Ты выиграл, у диллера #{card_amount(@dealer)}очков"
            new_game
       end
