@@ -67,6 +67,18 @@ def menu
       new_game
     end
   end
+
+  def human_give
+    add_card(@human)
+    puts "Вы взяли карту #{@human.hand[2].card}#{@human.hand[2].shirt}, сумма карт стала #{card_amount(@human)} "
+    dealer_give
+    if card_amount(@human) <= 21 && card_amount(@human) > card_amount(@dealer)
+      puts "У диллера #{card_amount(@dealer)} очков"
+      @human.double_win
+      puts "Ты победил.Сумма твоих карт #{card_amount(@human)} У тебя #{@human.coin}$"
+    end
+    new_game
+  end
   when 1 then 
   when 2 then 
   when 3 then 
