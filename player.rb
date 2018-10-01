@@ -1,4 +1,4 @@
-# class for player function management
+# parent class for dealer and human
 class Player
   attr_accessor :hand, :cards, :coin
 
