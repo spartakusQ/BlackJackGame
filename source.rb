@@ -1,5 +1,4 @@
 class Source
-  
   def start_game
     2.times { add_card(@human) }
     2.times { add_card(@dealer) }
@@ -122,7 +121,4 @@ class Source
       exit
     end
   end
-
-
-
 end

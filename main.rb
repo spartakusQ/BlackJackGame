@@ -6,7 +6,6 @@ require_relative 'player'
 require_relative 'source'
 # class to manage the game
 class MainInterface < Source
-
   attr_accessor :cards, :deck, :hand, :player, :coin
 
   def initialize
