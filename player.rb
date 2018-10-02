@@ -1,13 +1,5 @@
 # parent class for dealer and human
 class Player
-  
-  def initialize(name)
-    @name = name
-    @coin = 100
-    @cards = Deck.new
-    @hand = []
-  end
-
   def deal
     @hand << @cards.reach
   end
