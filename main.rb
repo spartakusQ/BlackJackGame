@@ -15,12 +15,14 @@ class MainInterface
     start_game
   end
 
-  def hello
-    puts 'Для начала игры введите своё имя: '
-    @name = gets.chomp.capitalize
-    puts "#{@name} сегодня хороший вечер чтобы заработать несколько монет."
+  def start_game
+    2.times { add_card(@human) }
+    2.times { add_card(@dealer) }
+    @human.rate
+    @dealer.rate
+    first_distribution
+    menu
   end
-  
 
   def menu
     case input
@@ -31,6 +33,12 @@ class MainInterface
     end
   end
 
+  def hello
+    puts 'Для начала игры введите своё имя: '
+    @name = gets.chomp.capitalize
+    puts "#{@name} сегодня хороший вечер чтобы заработать несколько монет."
+  end
+
   def input
     puts %(Смотрите карты и решайте:
     1- Взять одну карту
@@ -38,16 +46,10 @@ class MainInterface
     3- Открываем карты)
     input = gets.to_i
   end
-  
 
-  def start_game
-    2.times { add_card(@human) }
-    2.times { add_card(@dealer) }
-    @human.rate
-    @dealer.rate
+  def first_distribution
     puts "#{@name} у вас на руках карты #{@human.hand[0].par} #{@human.hand[0].shirt} #{@human.hand[1].par}#{@human.hand[1].shirt} у вас осталось #{@human.coin}$ сумма карт #{card_amount(@human)} "
-    puts "#{see_dealer} и осталось #{@dealer.coin}$"
-    menu
+    puts "#{see_dealer} и осталось #{@dealer.coin}$"    
   end
 
   def show_card_human
