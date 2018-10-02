@@ -9,20 +9,20 @@ class MainInterface
 
   def initialize
     @deck = Deck.new
-    puts 'Для начала игры введите своё имя: '
-    @name = gets.chomp.capitalize
-    puts "#{@name} сегодня хороший вечер чтобы заработать несколько монет."
     @human = Gambler.new(@name)
     @dealer = Dealer.new('Dealer')
+    hello
     start_game
   end
 
+  def hello
+    puts 'Для начала игры введите своё имя: '
+    @name = gets.chomp.capitalize
+    puts "#{@name} сегодня хороший вечер чтобы заработать несколько монет."
+  end
+  
+
   def menu
-    puts %(Смотрите карты и решайте:
-      1- Взять одну карту
-      2- Пропустить ход
-      3- Открываем карты)
-    input = gets.to_i
     case input
     when 1 then human_give
     when 2 then dealer_give
@@ -30,6 +30,15 @@ class MainInterface
     when 0 then exit
     end
   end
+
+  def input
+    puts %(Смотрите карты и решайте:
+    1- Взять одну карту
+    2- Пропустить ход
+    3- Открываем карты)
+    input = gets.to_i
+  end
+  
 
   def start_game
     2.times { add_card(@human) }
