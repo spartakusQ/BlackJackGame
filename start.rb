@@ -1,5 +1,5 @@
 require_relative 'main.rb'
 
-start = MainInterface.new
-start.menu
-start.start_game
+start = Main.new
+
+start.run_game
