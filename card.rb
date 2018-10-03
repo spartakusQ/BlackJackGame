@@ -14,4 +14,8 @@ class Card
     return 10 if %w[J Q K].include?(par)
     return 1 if par == 'A'
   end
+
+  def to_s
+    "#{rank}" "#{suit}"
+  end
 end

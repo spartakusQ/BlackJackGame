@@ -11,11 +11,10 @@ class Game
     @deck = Deck.new
     @human = Gambler.new(@name)
     @dealer = Dealer.new('Dealer')
-    hello
-    start_game
   end
 
   def start_game
+    
     2.times { add_card(@human) }
     2.times { add_card(@dealer) }
     @human.rate
@@ -25,26 +24,12 @@ class Game
   end
 
   def menu
-    case input
+    case Main.new.menu_input
     when 1 then human_give
     when 2 then dealer_give
     when 3 then show_card_human
     when 0 then exit
     end
-  end
-
-  def hello
-    puts 'Для начала игры введите своё имя: '
-    @name = gets.chomp.capitalize
-    puts "#{@name} сегодня хороший вечер чтобы заработать несколько монет."
-  end
-
-  def input
-    puts %(Смотрите карты и решайте:
-    1- Взять одну карту
-    2- Пропустить ход
-    3- Открываем карты)
-    input = gets.to_i
   end
 
   def first_distribution
