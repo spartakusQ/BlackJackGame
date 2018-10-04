@@ -14,25 +14,14 @@ class Game
   end
 
   def start_round
-    
     2.times { add_card(@human) }
     2.times { add_card(@dealer) }
     @human.rate
     @dealer.rate
     first_distribution
-    
-    
-    menu
   end
 
-  def menu
-    case Interface.new.menu_input
-    when 1 then human_give
-    when 2 then dealer_give
-    when 3 then show_card_human
-    when 0 then exit
-    end
-  end
+
 
   def first_distribution
     @player_hand = []
@@ -128,7 +117,7 @@ class Game
       until @human.zero? && @dealer.zero?
         @human.reset_cards
         @dealer.reset_cards
-        start_game
+        start_round
         if @human.zero?
           exit puts 'Радуйтесь что с вами ваша гордость и штаны.'
         elsif @dealer.zero?
