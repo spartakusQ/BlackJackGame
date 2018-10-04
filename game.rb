@@ -26,7 +26,7 @@ class Game
   end
 
   def menu
-    case Main.new.menu_input
+    case Interface.new.menu_input
     when 1 then human_give
     when 2 then dealer_give
     when 3 then show_card_human
@@ -45,7 +45,7 @@ class Game
     @player_bank = []
     @player_bank << @human.coin
     @player_bank.each {|x| puts x }
-    Main.see_table_dealer
+    Interface.see_table_dealer
     # у вас осталось #{@human.coin}$ сумма карт #{card_amount(@human)} "
     puts "#{see_dealer} #{@dealer.coin}$"
   end
