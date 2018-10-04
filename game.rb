@@ -13,13 +13,15 @@ class Game
     @dealer = Dealer.new('Dealer')
   end
 
-  def start_game
+  def start_round
     
     2.times { add_card(@human) }
     2.times { add_card(@dealer) }
     @human.rate
     @dealer.rate
     first_distribution
+    
+    
     menu
   end
 
@@ -33,9 +35,28 @@ class Game
   end
 
   def first_distribution
-    puts "#{@name} у вас на руках карты #{@human.hand[0].par} #{@human.hand[0].shirt} #{@human.hand[1].par}#{@human.hand[1].shirt} у вас осталось #{@human.coin}$ сумма карт #{card_amount(@human)} "
-    puts "#{see_dealer} и осталось #{@dealer.coin}$"    
+    @player_hand = []
+    @player_hand << @human.hand[0].par + @human.hand[0].shirt + ' ' + @human.hand[1].par + @human.hand[1].shirt
+    # @player_hand.each {|x| puts x }
+    player_amount
+
+# puts "#{@name} у вас на руках карты #{@human.hand[0].par} #{@human.hand[0].shirt} #{@human.hand[1].par}#{@human.hand[1].shirt}
+
+    @player_bank = []
+    @player_bank << @human.coin
+    @player_bank.each {|x| puts x }
+    Main.see_table_dealer
+    # у вас осталось #{@human.coin}$ сумма карт #{card_amount(@human)} "
+    puts "#{see_dealer} #{@dealer.coin}$"
   end
+
+
+  def player_amount
+    @player_amount = []
+    @player_amount << card_amount(@human)
+    @player_amount.each {|x| puts x }
+  end
+  
 
   def show_card_human
     puts "#{@name} у вас на руках карты #{@human.hand[0].par} #{@human.hand[0].shirt} #{@human.hand[1].par}
@@ -133,6 +154,6 @@ class Game
   end
 
   def see_dealer
-    "У диллера #{@dealer.show_dealer} карты"
+     @dealer.show_dealer
   end
 end

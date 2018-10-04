@@ -15,7 +15,7 @@ class Main
     puts 'Для начала игры введите своё имя: '
     @@name = gets.chomp.capitalize
     puts "#{@@name} сегодня хороший вечер чтобы заработать несколько монет."
-    Game.new.start_game
+    @game.start_round
   end
 
   def menu_input
@@ -26,9 +26,12 @@ class Main
     menu_input = gets.to_i
   end
 
-  # def see_table
-  #   puts "#{@@name} у вас на руках карты "
-  #   Game.new.player_card
-  # end
+  def see_table_human    
+    puts "У вас на руках карты #{@game.player_hand.each {|x| puts x }}"
+  end
+
+  def self.see_table_dealer
+    puts 'У диллера на руках'
+  end
   
 end
