@@ -11,14 +11,20 @@ class Game
     @deck = Deck.new
     @human = Gambler.new(@name)
     @dealer = Dealer.new('Dealer')
+    @bank = 0
   end
 
   def start_round
     2.times { @human.deal }
     2.times { @dealer.deal }
-    @human.rate
-    @dealer.rate
+    @human.add_bank
+    @dealer.add_bank
+
     # first_distribution
+  end
+
+  def show_bank
+    @bank
   end
 
   #показать руку игрока
@@ -31,17 +37,29 @@ class Game
      @dealer.show_dealer
   end
 
-  #добавить карту игру в руку
+  #добавить карту в руку игрока
   def human_add_card
     @human.deal
   end
 
+  #добавить карту в руку дилера
+  def dealer_add_card
+    @dealer.deal
+  end
+
+  #показать руку диллера (открыться)
+  def show_dealer_card
+    @dealer.show_dealer_open
+  end
+
+  #добавить карту в руку диллера
+  def show_dealer_add_card
+    @dealer.see_dealer_change
+  end
+
   def human_see_add_card
     @human.see_gambler_change
-  end
-  
-  
-  
+  end  
 
   def human_scores
     @human.scorer_values
@@ -54,33 +72,23 @@ class Game
   def see_human
     @human.show_card
   end
-  
 
-
-
-
-
-  
-
-
-
-  def first_distribution
-    @player_hand = []
-    @player_hand << @human.hand[0].par + @human.hand[0].shirt + ' ' + @human.hand[1].par + @human.hand[1].shirt
-    # @player_hand.each {|x| puts x }
-    # puts "#{@name} у вас на руках карты #{@human.hand[0].par} #{@human.hand[0].shirt} #{@human.hand[1].par}#{@human.hand[1].shirt}
-    @player_bank = []
-    @player_bank << @human.coin
-    @player_bank.each {|x| puts x }
-    # у вас осталось #{@human.coin}$ сумма карт #{card_amount(@human)} "
-    # puts "#{see_dealer} #{@dealer.coin}$"
+  def human_win
+    @human.win
   end
 
-
-  def player_amount
-    @player_amount = []
-    @player_amount << card_amount(@human)
-    # @player_amount.each {|x| puts x }
+  def dealer_win
+    @dealer.win
+    @dealer.add_
   end
+
+  def human_coin
+    @human.coin
+  end
+
+  def dealer_coin
+    @dealer.coin
+  end
+  
 
 end

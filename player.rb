@@ -4,7 +4,7 @@ class Player
     @hand << @cards.reach
   end
 
-  def rate
+  def add_bank
     @coin -= 10
   end
 

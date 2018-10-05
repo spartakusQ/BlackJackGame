@@ -11,19 +11,21 @@ class Interface
     @@name = gets.chomp.capitalize
     puts "#{@@name} сегодня хороший вечер чтобы заработать несколько монет."
     @game.start_round
-    # @game.first_distribution
+    puts "Банк игры равен = #{@game.show_bank}"
     see_table_human
     see_table_dealer
+    
+    
     
     menu
   end
 
   def see_table_human
-    puts "У вас на руках карты #{@game.player_hand}, сумма ваших карт равна #{@game.human_scores}"
+    puts "У вас на руках карты #{@game.player_hand}, сумма ваших карт равна #{@game.human_scores} банк игрока равен = #{@game.human_coin}$"
   end
 
   def see_table_dealer
-    puts "У диллера на руках #{@game.see_dealer} карты"
+    puts "У диллера на руках #{@game.see_dealer} карты и банк диллера равен = #{@game.dealer_coin}$"
   end
 
   def menu
@@ -43,77 +45,46 @@ class Interface
 
   def human_give
     @game.human_add_card
-    puts "Вы взяли карту #{@game.human_see_add_card} теперь у вас руках #{@game.player_hand+ ' '  + @game.human_see_add_card}: сумма карт равна  #{@game.human_scores}"
+    puts "Вы взяли карту #{@game.human_see_add_card} теперь у вас руках #{@game.player_hand + ' ' + @game.human_see_add_card}: сумма карт равна  #{@game.human_scores}"
     if @game.human_scores > 21
-       puts 'Вы проиграли'
-      exit
-    end
-
-    menu
-    # dealer_give
-    # if card_amount(@human) <= 21 && card_amount(@human) > card_amount(@dealer)
-    #   # puts "У диллера #{card_amount(@dealer)} очков"
-    #   @human.double_win
-    #   # puts "Ты победил.Сумма твоих карт #{card_amount(@human)} У тебя #{@human.coin}$"
-    # end
-    # new_game
-  end
-
-
-
-
-
-
-
-    def show_card_human
-    # puts "#{@name} у вас на руках карты #{@human.hand[0].par} #{@human.hand[0].shirt} #{@human.hand[1].par}
-    # #{@human.hand[1].shirt} сумма #{card_amount(@human)}"
-    # puts "У диллера на руках карты #{@dealer.hand[0].par} #{@dealer.hand[0].shirt} #{@human.hand[1].par}
-    # #{@dealer.hand[1].shirt} сумма #{card_amount(@dealer)}"
-    if card_amount(@dealer) > card_amount(@human) && card_amount(@dealer) < 21
-      @dealer.double_win
-      # puts "Ты проиграл, Выйграл диллер. У диллера #{@dealer.coin}$, у тебя #{@human.coin}$"
-      new_game
-    elsif card_amount(@human) > card_amount(@dealer) && card_amount(@human) < 21
-      # puts "Ты выиграл, у диллера #{card_amount(@dealer)}очков"
-      @human.double_win
-      new_game
+      @game.dealer_win
+       puts "Вы проиграли - Выйграл диллер - банк диллера = #{@game.dealer_coin}$ - ваш банк = #{@game.human_coin}$"
+       exit
+    elsif @game.human_scores == 21
+      puts "У диллера на руках карты: #{@game.show_dealer_card}"
+      if @game.human_scores < @game.dealer_scores
+        puts 'Выйграл игрок'
+        @game.human_win
+      else
+        puts 'Выйграл диллер'
+        @game.dealer_win
+      end
     else
-      @player.win
-      @dealer.win
-      # puts 'Ничья. Деньги возвращены обратно'
-      new_game
+      puts %(Решайте что делаем дальше:
+            1- Взять ещё одну карту
+            2- Открыться)
+        give_input = gets.to_i
+        case give_input
+        when 1 then @game.human_add_card
+          puts "Вы взяли карту #{@game.human_see_add_card} теперь у вас руках #{@game.player_hand + ' ' + @game.human_see_add_card}: сумма карт равна  #{@game.human_scores}"
+
+
+        when 2 then 
+         puts "У диллера на руках карты: #{@game.show_dealer_card} сумма карт равна #{@game.dealer_scores}"
+          if @game.human_scores < @game.dealer_scores
+            puts 'Выйграл игрок'
+            @game.human_win
+            exit
+          else
+            puts 'Выйграл диллер'
+            @game.dealer_win
+            exit
+          end
+        when 0 then exit
+        end
     end
   end
 
-
-
-  def dealer_give
-    while card_amount(@dealer) <= 17
-      add_card(@dealer)
-      # puts "Дилер взял карту #{@dealer.hand[2].par}#{@dealer.hand[2].shirt} "
-      # puts "У диллера #{@dealer.hand[0].par}#{@dealer.hand[0].shirt} #{@dealer.hand[1].par}#{@dealer.hand[1].shirt} #{@dealer.hand[2].par}#{@dealer.hand[2].shirt}сумма карт #{card_amount(@dealer)}"
-      if card_amount(@dealer) > card_amount(@human) && card_amount(@dealer) < 21
-        @dealer.double_win
-        # puts "Ты проиграл, Выйграл диллер. У диллера #{@dealer.coin}$, у тебя #{@human.coin}$"
-        new_game
-      elsif @human.double_win
-          #  puts "Ты выиграл, у диллера #{card_amount(@dealer)}очков"
-           new_game
-      end
-      if card_amount(@dealer) == 21
-        # puts "У диллера #{@dealer.hand[0].par}#{@dealer.hand[0].shirt} #{@dealer.hand[1].par}#{@dealer.hand[1].shirt}"
-        @dealer.double_win
-        # puts "Диллер выйграл сумма карт #{card_amount(@dealer)} У диллера #{@dealer.coin}$ у тебя #{@human.coin}$"
-        new_game
-      elsif card_amount(@dealer) > 21
-        # puts "У диллера #{@dealer.hand[0].par}#{@dealer.hand[0].shirt} #{@dealer.hand[1].par}#{@dealer.hand[1].shirt}"
-        @human.double_win
-        # puts "У диллера больше 21, ты победил. У тебя #{@human.coin}$"
-        new_game
-      end
-    end
-  end
 
     def new_game
     puts %(Может ещё одна партию?
