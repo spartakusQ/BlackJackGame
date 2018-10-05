@@ -9,4 +9,8 @@ class Gambler < Player
     @cards = Deck.new
     @hand = []
   end
+
+  def show_gambler
+    @hand
+  end
 end
