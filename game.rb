@@ -21,13 +21,27 @@ class Game
     # first_distribution
   end
 
+  #показать руку игрока
   def player_hand
     @human.show_gambler
   end
 
+  #показать руку диллера (только количество карт)
   def see_dealer
      @dealer.show_dealer
   end
+
+  #добавить карту игру в руку
+  def human_add_card
+    @human.deal
+  end
+
+  def human_see_add_card
+    @human.see_gambler_change
+  end
+  
+  
+  
 
   def human_scores
     @human.scorer_values
@@ -40,6 +54,7 @@ class Game
   def see_human
     @human.show_card
   end
+  
 
 
 

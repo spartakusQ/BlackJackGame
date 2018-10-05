@@ -13,16 +13,17 @@ class Interface
     @game.start_round
     # @game.first_distribution
     see_table_human
+    see_table_dealer
     
     menu
   end
 
   def see_table_human
-    puts "У вас на руках карты #{@game.player_hand.each {|x| puts x }}"
+    puts "У вас на руках карты #{@game.player_hand}, сумма ваших карт равна #{@game.human_scores}"
   end
 
   def see_table_dealer
-    puts 'У диллера на руках'
+    puts "У диллера на руках #{@game.see_dealer} карты"
   end
 
   def menu
@@ -41,15 +42,21 @@ class Interface
 
 
   def human_give
-    @human.deal
-    # puts "Вы взяли карту #{@human.hand[2].par}#{@human.hand[2].shirt}, сумма карт стала #{card_amount(@human)} "
-    dealer_give
-    if card_amount(@human) <= 21 && card_amount(@human) > card_amount(@dealer)
-      # puts "У диллера #{card_amount(@dealer)} очков"
-      @human.double_win
-      # puts "Ты победил.Сумма твоих карт #{card_amount(@human)} У тебя #{@human.coin}$"
+    @game.human_add_card
+    puts "Вы взяли карту #{@game.human_see_add_card} теперь у вас руках #{@game.player_hand+ ' '  + @game.human_see_add_card}: сумма карт равна  #{@game.human_scores}"
+    if @game.human_scores > 21
+       puts 'Вы проиграли'
+      exit
     end
-    new_game
+
+    menu
+    # dealer_give
+    # if card_amount(@human) <= 21 && card_amount(@human) > card_amount(@dealer)
+    #   # puts "У диллера #{card_amount(@dealer)} очков"
+    #   @human.double_win
+    #   # puts "Ты победил.Сумма твоих карт #{card_amount(@human)} У тебя #{@human.coin}$"
+    # end
+    # new_game
   end
 
 
