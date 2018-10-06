@@ -98,6 +98,19 @@ class Game
     @dealer.zero?
   end
 
+  def human_reset_cards
+    @human.reset_cards
+  end
+  
+  def dealer_reset_cards
+    @dealer.reset_cards
+  end
+  
+
+  
+
+
+  
   
 
   

@@ -6,10 +6,17 @@ class Interface
     @game = Game.new
   end
 
-  def run_game
+
+  def greeting
     puts 'Для начала игры введите своё имя: '
     @@name = gets.chomp.capitalize
     puts "#{@@name} сегодня хороший вечер чтобы заработать несколько монет."
+    run_game
+  end
+  
+
+
+  def run_game
     @game.start_round
     puts "Банк игры равен = #{@game.show_bank}"
     see_table_human
@@ -91,13 +98,15 @@ class Interface
     case new_game_input
     when 1 then
       until @game.human_zero && @game.dealer_zero
-        @human.reset_cards
-        @dealer.reset_cards
+        @game.human_reset_cards
+        @game.dealer_reset_cards
         run_game
         if @game.human_zero
-          exit puts 'Радуйтесь что с вами ваша гордость и штаны.'
+          puts 'Радуйтесь что с вами ваша гордость и штаны.'
+          exit
         elsif @game.dealer_zero
-          exit puts 'Банк диллера пуст.'
+          puts 'Банк диллера пуст.'
+          exit
         end
       end
     when 2 then
