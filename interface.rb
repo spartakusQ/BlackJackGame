@@ -14,9 +14,6 @@ class Interface
     puts "Банк игры равен = #{@game.show_bank}"
     see_table_human
     see_table_dealer
-    
-    
-    
     menu
   end
 
@@ -49,7 +46,7 @@ class Interface
     if @game.human_scores > 21
       @game.dealer_win
        puts "Вы проиграли - Выйграл диллер - банк диллера = #{@game.dealer_coin}$ - ваш банк = #{@game.human_coin}$"
-       exit
+       new_game
     elsif @game.human_scores == 21
       puts "У диллера на руках карты: #{@game.show_dealer_card}"
       if @game.human_scores < @game.dealer_scores
@@ -74,11 +71,11 @@ class Interface
           if @game.human_scores < @game.dealer_scores
             puts 'Выйграл игрок'
             @game.human_win
-            exit
+            new_game
           else
             puts 'Выйграл диллер'
             @game.dealer_win
-            exit
+            new_game
           end
         when 0 then exit
         end
@@ -90,16 +87,16 @@ class Interface
     puts %(Может ещё одна партию?
       1- Сыграть ещё одну партию.
       2- Уйти домой в штанах.)
-    input = gets.to_i
-    case input
+    new_game_input = gets.to_i
+    case new_game_input
     when 1 then
-      until @human.zero? && @dealer.zero?
+      until @game.human_zero && @game.dealer_zero
         @human.reset_cards
         @dealer.reset_cards
-        start_round
-        if @human.zero?
+        run_game
+        if @game.human_zero
           exit puts 'Радуйтесь что с вами ваша гордость и штаны.'
-        elsif @dealer.zero?
+        elsif @game.dealer_zero
           exit puts 'Банк диллера пуст.'
         end
       end

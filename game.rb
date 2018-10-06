@@ -79,7 +79,6 @@ class Game
 
   def dealer_win
     @dealer.win
-    @dealer.add_
   end
 
   def human_coin
@@ -89,6 +88,19 @@ class Game
   def dealer_coin
     @dealer.coin
   end
+
+  def human_zero
+    @human.zero?
+  end
+
+
+  def dealer_zero
+    @dealer.zero?
+  end
+
+  
+
+  
   
 
 end
