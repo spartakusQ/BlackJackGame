@@ -74,11 +74,11 @@ class Game
   end
 
   def human_win
-    @human.win
+    @human.double_win
   end
 
   def dealer_win
-    @dealer.win
+    @dealer.double_win
   end
 
   def human_coin

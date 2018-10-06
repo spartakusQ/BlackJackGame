@@ -71,10 +71,8 @@ class Interface
         case give_input
         when 1 then @game.human_add_card
           puts "Вы взяли карту #{@game.human_see_add_card} теперь у вас руках #{@game.player_hand + ' ' + @game.human_see_add_card}: сумма карт равна  #{@game.human_scores}"
-
-
         when 2 then 
-         puts "У диллера на руках карты: #{@game.show_dealer_card} сумма карт равна #{@game.dealer_scores}"
+          puts "У диллера на руках карты: #{@game.show_dealer_card} сумма карт равна #{@game.dealer_scores}"
           if @game.human_scores < @game.dealer_scores
             puts 'Выйграл игрок'
             @game.human_win
