@@ -18,7 +18,7 @@ class Interface
 
   def run_game
     @game.start_round
-    puts "Банк игры равен = #{@game.show_bank}"
+    # puts "Банк игры равен = #{@game.show_bank}"
     see_table_human
     see_table_dealer
     menu
@@ -40,7 +40,7 @@ class Interface
     menu_input = gets.to_i
     case menu_input
     when 1 then human_give
-    when 2 then @game.dealer_give
+    when 2 then dealer_give
     when 3 then @game.show_card_human
     when 0 then exit
     end
@@ -86,6 +86,35 @@ class Interface
         end
     end
   end
+
+
+  def dealer_give
+    while @game.dealer_scores <= 17
+      @game.dealer_add_card
+      puts "Диллер взял карту #{@game.show_dealer_add_card}"
+      puts "У диллера #{@game.show_dealer_card + " " + @game.show_dealer_add_card} сумма карт диллера равна #{@game.dealer_scores}"
+    end
+    if @game.dealer_scores > @game.human_scores && @game.dealer_scores < 21
+      @game.dealer_win
+      puts "Ты проиграл, Выйграл диллер. У диллера #{@game.dealer_coin}$, у тебя #{@game.human_coin}$"
+      new_game
+    else
+      @game.human_win
+      puts "Ты выиграл, у диллера #{@game.dealer_scores}очков"
+      new_game
+    end
+    if @game.dealer_scores == 21
+      puts "У диллера #{@game.show_dealer_card}"
+      @game.dealer_win
+      new_game
+    elsif @game.dealer_scores > 21
+      puts "У диллера #{@game.show_dealer_card}"
+      @game.human_win
+      puts "У диллера больше 21, ты победил. У тебя #{@game.human_coin}$"
+      new_game
+    end
+  end
+  
 
 
     def new_game
