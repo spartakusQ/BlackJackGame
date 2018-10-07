@@ -17,5 +17,4 @@ class Gambler < Player
   def see_gambler_change
     @hand[2].par + @hand[2].shirt
   end
-
 end

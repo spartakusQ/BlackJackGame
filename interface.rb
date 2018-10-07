@@ -1,11 +1,9 @@
 require_relative 'game'
 
 class Interface
-
   def initialize
     @game = Game.new
   end
-
 
   def greeting
     puts 'Для начала игры введите своё имя: '
@@ -13,8 +11,6 @@ class Interface
     puts "#{@@name} сегодня хороший вечер чтобы заработать несколько монет."
     run_game
   end
-  
-
 
   def run_game
     @game.start_round
@@ -41,11 +37,10 @@ class Interface
     case menu_input
     when 1 then human_give
     when 2 then dealer_give
-    when 3 then @game.show_card_human
+    when 3 then show_card_human
     when 0 then exit
     end
   end
-
 
   def human_give
     @game.human_add_card
@@ -71,7 +66,7 @@ class Interface
         case give_input
         when 1 then @game.human_add_card
           puts "Вы взяли карту #{@game.human_see_add_card} теперь у вас руках #{@game.player_hand + ' ' + @game.human_see_add_card}: сумма карт равна  #{@game.human_scores}"
-        when 2 then 
+        when 2 then
           puts "У диллера на руках карты: #{@game.show_dealer_card} сумма карт равна #{@game.dealer_scores}"
           if @game.human_scores < @game.dealer_scores
             puts 'Выйграл игрок'
@@ -87,12 +82,11 @@ class Interface
     end
   end
 
-
   def dealer_give
     while @game.dealer_scores <= 17
       @game.dealer_add_card
       puts "Диллер взял карту #{@game.show_dealer_add_card}"
-      puts "У диллера #{@game.show_dealer_card + " " + @game.show_dealer_add_card} сумма карт диллера равна #{@game.dealer_scores}"
+      puts "У диллера #{@game.show_dealer_card + ' ' + @game.show_dealer_add_card} сумма карт диллера равна #{@game.dealer_scores}"
     end
     if @game.dealer_scores > @game.human_scores && @game.dealer_scores < 21
       @game.dealer_win
@@ -100,7 +94,7 @@ class Interface
       new_game
     else
       @game.human_win
-      puts "Ты выиграл, у диллера #{@game.dealer_scores}очков"
+      puts "Ты выиграл, у диллера #{@game.dealer_scores} очков"
       new_game
     end
     if @game.dealer_scores == 21
@@ -114,8 +108,25 @@ class Interface
       new_game
     end
   end
-  
 
+  def show_card_human
+    puts "#{@@name} у вас на руках карты #{@game.player_hand} сумма #{@game.human_scores}"
+    puts "У диллера на руках карты #{@game.show_dealer_card} сумма #{@game.dealer_scores}"
+    if @game.dealer_scores > @game.human_scores && @game.dealer_scores < 21
+      @game.dealer_win
+      puts "Ты проиграл, Выйграл диллер. У диллера #{@game.dealer_coin}$, у тебя #{@game.human_coin}$"
+      new_game
+    elsif @game.human_scores > @game.dealer_scores && @game.dealer_scores < 21
+      puts "Ты выиграл, у диллера #{@game.dealer_scores}очков"
+      @game.human_win
+      new_game
+    else
+      @game.human_win
+      @game.dealer_win
+      puts 'Ничья. Деньги возвращены обратно'
+      new_game
+    end
+  end
 
     def new_game
     puts %(Может ещё одна партию?
@@ -141,5 +152,4 @@ class Interface
       exit
     end
   end
-  
 end

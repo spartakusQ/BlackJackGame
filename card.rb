@@ -15,12 +15,7 @@ class Card
     return 1 if par == 'A'
   end
 
-
-  
-
   def to_s
     "#{par}-#{shirt}"
   end
-
-
 end
