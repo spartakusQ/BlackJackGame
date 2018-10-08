@@ -11,7 +11,6 @@ class Game
     @deck = Deck.new
     @human = Gambler.new(@name)
     @dealer = Dealer.new('Dealer')
-    @bank = 0
   end
 
   def start_round
@@ -19,12 +18,6 @@ class Game
     2.times { @dealer.deal }
     @human.add_bank
     @dealer.add_bank
-
-    # first_distribution
-  end
-
-  def show_bank
-    @bank
   end
 
   # показать руку игрока
